@@ -6,6 +6,7 @@ import {
   startOfMonth,
 } from "date-fns";
 import DayCell from "./DayCell";
+import { useState } from "react";
 
 interface CalendarGridProps {
   currentDate: Date;
@@ -13,6 +14,7 @@ interface CalendarGridProps {
 }
 
 const CalendarGrid: React.FC<CalendarGridProps> = ({ currentDate }) => {
+  const [openMenuDay, setOpenMenuDay] = useState<number | null>(null);
   const daysInMonth = getDaysInMonth(currentDate);
   const startWeekday = getDay(startOfMonth(currentDate));
   const endWeekday = getDay(endOfMonth(currentDate));
@@ -23,6 +25,10 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({ currentDate }) => {
   const emptyCellsEnd = Array.from({ length: 6 - endWeekday }, (_, i) => (
     <div key={`empty-end-${i}`} style={{ width: "40px", height: "40px" }} />
   ));
+
+  const handleDayClick = (day: number) => {
+    setOpenMenuDay(openMenuDay === day ? null : day); 
+  };
 
   const totalCells = [
     ...emptyCellsStart,
@@ -39,6 +45,7 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({ currentDate }) => {
           day={day}
           currentDate={currentDate}
           isCurrentDay={isCurrentDay}
+          onClick={() => handleDayClick(day)}
         />
       );
     }),
