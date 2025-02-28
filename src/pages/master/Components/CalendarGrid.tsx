@@ -1,11 +1,7 @@
 import {
-  eachDayOfInterval,
-  endOfMonth,
-  endOfWeek,
   getDay,
   getDaysInMonth,
   startOfMonth,
-  startOfWeek,
 } from "date-fns";
 import DayCell from "./DayCell";
 
