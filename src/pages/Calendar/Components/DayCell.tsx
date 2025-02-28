@@ -1,8 +1,10 @@
 interface dayCellProps {
   day: number;
+  currentDate: Date;
+  isCurrentDay: boolean;
 }
 
-const dayCell: React.FC<dayCellProps> = ({ day }) => {
+const dayCell: React.FC<dayCellProps> = ({ day, isCurrentDay }) => {
   return (
     <div
       style={{
@@ -12,7 +14,7 @@ const dayCell: React.FC<dayCellProps> = ({ day }) => {
         alignItems: "center",
         justifyContent: "center",
         borderRadius: "50%", 
-        backgroundColor: "rgba(255, 255, 255, 0.2)", 
+        backgroundColor: isCurrentDay ? "#007bff" : "rgba(255, 255, 255, 0.2)", 
         color: "#fff", 
         fontSize: "16px",
         fontWeight: "bold",
@@ -21,10 +23,10 @@ const dayCell: React.FC<dayCellProps> = ({ day }) => {
         transition: "background-color 0.3s ease", 
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.4)"; 
+        e.currentTarget.style.backgroundColor = isCurrentDay ? "#0057a8" : "rgba(255, 255, 255, 0.4)"; 
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.2)"; 
+        e.currentTarget.style.backgroundColor = isCurrentDay ? "#007bff" : "rgba(255, 255, 255, 0.2)"; 
       }}
     >
       {day}

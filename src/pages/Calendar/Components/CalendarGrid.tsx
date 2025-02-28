@@ -2,6 +2,7 @@ import {
   endOfMonth,
   getDay,
   getDaysInMonth,
+  isToday,
   startOfMonth,
 } from "date-fns";
 import DayCell from "./DayCell";
@@ -22,9 +23,25 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({ currentDate }) => {
   const emptyCellsEnd = Array.from({ length: 6 - endWeekday }, (_, i) => (
     <div key={`empty-end-${i}`} style={{ width: "40px", height: "40px" }} />
   ));
+
   const totalCells = [
     ...emptyCellsStart,
-    ...daysArray.map((day) => <DayCell key={day} day={day} />),
+    ...daysArray.map((day) => {
+      const date = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth(),
+        day
+      );
+      const isCurrentDay = isToday(date);
+      return (
+        <DayCell
+          key={day}
+          day={day}
+          currentDate={currentDate}
+          isCurrentDay={isCurrentDay}
+        />
+      );
+    }),
     ...emptyCellsEnd,
   ];
   const rows = [];
@@ -34,7 +51,13 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({ currentDate }) => {
 
   return (
     <div>
-      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginBottom: "10px",
+        }}
+      >
         {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
           <div
             key={day}
@@ -51,13 +74,19 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({ currentDate }) => {
       </div>
 
       {rows.map((row, rowIndex) => (
-        <div key={rowIndex} style={{ display: "flex", justifyContent: "space-between", marginBottom: "5px" }}>
+        <div
+          key={rowIndex}
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginBottom: "5px",
+          }}
+        >
           {row}
         </div>
       ))}
     </div>
   );
 };
-
 
 export default CalendarGrid;
