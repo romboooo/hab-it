@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+import {AnimatePresence } from "framer-motion";
 import DropDownMenu from "./DropDownMenu";
 
 interface dayCellProps {

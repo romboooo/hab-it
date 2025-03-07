@@ -26,10 +26,6 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({ currentDate }) => {
     <div key={`empty-end-${i}`} style={{ width: "40px", height: "40px" }} />
   ));
 
-  const handleDayClick = (day: number) => {
-    setOpenDay(openDay === day ? null : day);
-  };
-
   const totalCells = [
     ...emptyCellsStart,
     ...daysArray.map((day) => {
