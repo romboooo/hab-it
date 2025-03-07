@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 
+
 interface DropDownMenuProps {
   isOpen: boolean;
   onClose: () => void;
@@ -23,9 +24,9 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({
       transition={{ duration: 0.2, ease: "easeOut" }}
       style={{
         position: "absolute",
-        top: "120%", // Смещение ниже ячейки
-        right: "-20px", // Смещение вправо
-        transformOrigin: "top right", // Точка трансформации
+        top: "120%", 
+        right: "-20px",
+        transformOrigin: "top right", 
         backgroundColor: "#fff",
         border: "1px solid #ccc",
         borderRadius: "8px",
