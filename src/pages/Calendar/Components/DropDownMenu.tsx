@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 interface DropDownMenuProps {
   isOpen: boolean;
   onClose: () => void;
@@ -13,22 +15,27 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({
     return null;
   }
   return (
-    <div
+    <motion.div
+      className="dropdown-menu"
+      initial={{ opacity: 0, x: 20, scale: 0.95 }}
+      animate={{ opacity: 1, x: 40, scale: 1 }}
+      exit={{ opacity: 0, x: 20, scale: 0.95 }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
       style={{
         position: "absolute",
-        top: "40px",
-        right: "0",
+        top: "120%", // Смещение ниже ячейки
+        right: "-20px", // Смещение вправо
+        transformOrigin: "top right", // Точка трансформации
         backgroundColor: "#fff",
         border: "1px solid #ccc",
-        borderRadius: "5px",
-        boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+        borderRadius: "8px",
         padding: "10px",
-        zIndex: 1000,
-      }}
+        boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+        zIndex: 1000,}}
     >
       <button
         onClick={(e) => {
-          e.stopPropagation(); 
+          e.stopPropagation();
           onClose();
         }}
         style={{ marginTop: "10px" }}
@@ -36,7 +43,7 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({
         Закрыть
       </button>
       <h1 style={{ color: "#000000" }}>{currDate}</h1>
-    </div>
+    </motion.div>
   );
 };
 export default DropDownMenu;

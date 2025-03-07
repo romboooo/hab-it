@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import DropDownMenu from "./DropDownMenu";
 
 interface dayCellProps {
@@ -9,12 +9,18 @@ interface dayCellProps {
   onClick: (day: number) => void;
 }
 
-const dayCell: React.FC<dayCellProps> = ({ day, isCurrentDay, isOpen, onClick }) => {
- 
+const dayCell: React.FC<dayCellProps> = ({
+  day,
+  isCurrentDay,
+  isOpen,
+  onClick,
+}) => {
   return (
     <div
+    
       style={{
         width: "40px",
+        position: "relative",
         height: "40px",
         display: "flex",
         alignItems: "center",
@@ -41,7 +47,13 @@ const dayCell: React.FC<dayCellProps> = ({ day, isCurrentDay, isOpen, onClick })
       onClick={() => onClick(day)}
     >
       {day}
-      <DropDownMenu isOpen={isOpen} onClose={() => onClick(day) } currDate={day}></DropDownMenu>
+      <AnimatePresence>
+        <DropDownMenu
+          isOpen={isOpen}
+          onClose={() => onClick(day)}
+          currDate={day}
+        ></DropDownMenu>
+      </AnimatePresence>
     </div>
   );
 };
