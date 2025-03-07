@@ -14,7 +14,7 @@ interface CalendarGridProps {
 }
 
 const CalendarGrid: React.FC<CalendarGridProps> = ({ currentDate }) => {
-  const [openMenuDay, setOpenMenuDay] = useState<number | null>(null);
+  const [openDay, setOpenDay] = useState<number | null>(null);
   const daysInMonth = getDaysInMonth(currentDate);
   const startWeekday = getDay(startOfMonth(currentDate));
   const endWeekday = getDay(endOfMonth(currentDate));
@@ -27,7 +27,7 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({ currentDate }) => {
   ));
 
   const handleDayClick = (day: number) => {
-    setOpenMenuDay(openMenuDay === day ? null : day); 
+    setOpenDay(openDay === day ? null : day);
   };
 
   const totalCells = [
@@ -45,7 +45,10 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({ currentDate }) => {
           day={day}
           currentDate={currentDate}
           isCurrentDay={isCurrentDay}
-          onClick={() => handleDayClick(day)}
+          isOpen={openDay === day}
+          onClick={(clickedDay) => {
+            setOpenDay((prev) => (prev === clickedDay ? null : clickedDay));
+          }}
         />
       );
     }),

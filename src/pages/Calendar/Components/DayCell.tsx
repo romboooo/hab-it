@@ -5,16 +5,12 @@ interface dayCellProps {
   day: number;
   currentDate: Date;
   isCurrentDay: boolean;
-  onClick: () => void;
+  isOpen: boolean;
+  onClick: (day: number) => void;
 }
 
-const dayCell: React.FC<dayCellProps> = ({ day, isCurrentDay }) => {
-  const [isDropDownMenuOpen, setDropDownMenuOpen] = useState(false);
-
-  const changeDropDownMenuState = () => {
-    setDropDownMenuOpen(!isDropDownMenuOpen);
-  };
-
+const dayCell: React.FC<dayCellProps> = ({ day, isCurrentDay, isOpen, onClick }) => {
+ 
   return (
     <div
       style={{
@@ -42,10 +38,10 @@ const dayCell: React.FC<dayCellProps> = ({ day, isCurrentDay }) => {
           ? "#007bff"
           : "rgba(255, 255, 255, 0.2)";
       }}
-      onClick={changeDropDownMenuState}
+      onClick={() => onClick(day)}
     >
       {day}
-      <DropDownMenu isOpen={isDropDownMenuOpen} onClose={() => setDropDownMenuOpen(false) } currDate={day}></DropDownMenu>
+      <DropDownMenu isOpen={isOpen} onClose={() => onClick(day) } currDate={day}></DropDownMenu>
     </div>
   );
 };

@@ -1,10 +1,14 @@
 interface DropDownMenuProps {
   isOpen: boolean;
   onClose: () => void;
-  currDate: number
+  currDate: number;
 }
 
-const DropDownMenu: React.FC<DropDownMenuProps> = ({ isOpen, onClose, currDate }) => {
+const DropDownMenu: React.FC<DropDownMenuProps> = ({
+  isOpen,
+  onClose,
+  currDate,
+}) => {
   if (!isOpen) {
     return null;
   }
@@ -22,10 +26,16 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({ isOpen, onClose, currDate }
         zIndex: 1000,
       }}
     >
-      <button onClick={onClose} style={{ marginTop: "10px" }}>
+      <button
+        onClick={(e) => {
+          e.stopPropagation(); 
+          onClose();
+        }}
+        style={{ marginTop: "10px" }}
+      >
         Закрыть
       </button>
-      <h1 style={{color: "#000000"}} >{currDate}</h1>
+      <h1 style={{ color: "#000000" }}>{currDate}</h1>
     </div>
   );
 };
